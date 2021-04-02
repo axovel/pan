@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use app\user;
+use App\User;
 /*
 |--------------------------------------------------------------------------
 | API Routes
