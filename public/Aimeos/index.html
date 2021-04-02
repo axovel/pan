@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-3.2.1.min.js"></script>
+</head>
+<body>
+<script>
+    jQuery('document').ready( function () {
+
+        var data = JSON.stringify({'data': [{
+                'attributes': {
+                    'product.id': '22', // from product response
+                    'quantity': 2, // optional
+                    'stocktype': 'default', // warehouse code (optional)
+                }
+            }]});
+        console.log(data);
+
+        var url = 'http://innodesigns.yugasa.org/jsonapi/basket?id=default&related=product'; // from product response
+		
+
+        //if(response['meta']['csrf']) { // add CSRF token if available and therefore required
+            var csrf = {};
+            csrf['_token'] = 'b9NYjBkii05CRmPVtdYiVxMthVTDByutSHubMlIK';
+            url += (url.indexOf('?') === -1 ? '?' : '&') + $.param(csrf);
+        //}
+
+        $.ajax({
+            url: url,
+            method: "POST",
+            dataType: "json",
+			credentials: 'include',
+            data: data
+        }).done( function( result ) {
+            console.log( result );
+        });
+    });
+
+</script>
+</body>
+</html>
